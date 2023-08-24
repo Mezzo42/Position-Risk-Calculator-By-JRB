@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Position Risk Calculator By JRB</title>
+    <style>
+    body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+            var accountBalance = parseFloat(document.getElementById("accountBalance").value);
+            var stopLoss = parseFloat(document.getElementById("stopLoss").value);
+            var lotSize = parseFloat(document.getElementById("lotSize").value);
+
+            var risk = (stopLoss / 100) * lotSize * 10;  // Assuming 1 pip = 0.0001
+            var riskPercent = (risk / accountBalance) * 100;
+
+            var resultMessage = "Maximum Risk: " + risk.toFixed(2) + " USD\nRisk Percentage: " + riskPercent.toFixed(2) + "%";
+            alert(resultMessage);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Position Risk Calculator By JRB</h1>
+        <div class="input-group">
+            <label for="accountBalance">Account Balance:</label>
+            <input type="number" id="accountBalance" step="0.01" required>
+        </div>
+        
+        <div class="input-group">
+            <label for="stopLoss">Stop Loss (in pips):</label>
+            <input type="number" id="stopLoss" step="0.01" required>
+        </div>
+
+        <div class="input-group">
+            <label for="lotSize">Lot Size:</label>
+            <input type="number" id="lotSize" step="0.01" required>
+        </div>
+
+        <div class="input-group">
+            <label for="tradePair">Select Trade Pair:</label>
+            <select id="tradePair">
+                <option value="Gold">Gold</option>
+                <option value="Silver">Silver</option>
+            </select>
+        </div>
+
+        <button onclick="calculateRisk()">Calculate Risk</button>
+    </div>
+</body>
+</html>
